@@ -11,3 +11,4 @@ pytesseract
 faiss-cpu
 tqdm
 huggingface-hub
+sentence-transformers
