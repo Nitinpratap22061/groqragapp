@@ -1,0 +1,13 @@
+streamlit
+langchain
+langchain-groq
+langchain-community
+openai  # some langchain integrations depend on it
+python-dotenv
+pypdf
+unstructured
+pdf2image
+pytesseract
+faiss-cpu
+tqdm
+huggingface-hub
