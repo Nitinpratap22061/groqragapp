@@ -12,3 +12,7 @@ faiss-cpu
 tqdm
 huggingface-hub
 sentence-transformers
+pinecone-client
+langchain-pinecone
+cohere
+langchain-cohere
