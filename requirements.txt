@@ -5,14 +5,13 @@ langchain-community==0.2.10
 openai==1.35.14
 python-dotenv==1.0.1
 pypdf==4.2.0
-# unstructured removed (not needed for PyPDFLoader)
 pdf2image==1.17.0
 pytesseract==0.3.10
 faiss-cpu==1.8.0.post1
 tqdm==4.66.5
 huggingface-hub==0.24.5
 sentence-transformers==2.7.0
-pinecone-client==3.2.2
-langchain-pinecone==0.0.3
+pinecone-client==4.1.0
+langchain-pinecone==0.2.0
 cohere==5.5.8
 langchain-cohere==0.1.9
