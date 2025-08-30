@@ -5,6 +5,11 @@ It allows users to upload PDFs, process them into **chunks**, create **embedding
 
 ---
 
+
+
+
+Live App: [https://groqragapp.onrender.com/](https://groqragapp.onrender.com/)
+
 ## 🚀 Features
 - 📤 Upload PDFs directly in the web app
 - 📑 Extract and clean text from PDFs (supports scanned PDFs via OCR)
