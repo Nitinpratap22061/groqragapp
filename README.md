@@ -112,3 +112,8 @@ Feel free to fork this repo, raise issues, and submit PRs.
 
 ## 📜 License
 MIT License © 2025
+
+
+## 🚀 Demo
+
+Live App: [https://groqragapp.onrender.com/](https://groqragapp.onrender.com/)
