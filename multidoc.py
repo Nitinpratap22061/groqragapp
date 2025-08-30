@@ -17,46 +17,26 @@ load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
 cohere_api_key = os.getenv("COHERE_API_KEY")
 pinecone_api_key = os.getenv("PINECONE_API_KEY")
-pinecone_index = os.getenv("PINECONE_INDEX")  
+pinecone_index = os.getenv("PINECONE_INDEX")
 
-# Validate keys
 if not all([groq_api_key, cohere_api_key, pinecone_api_key, pinecone_index]):
-    st.error("Please set all API keys and the Pinecone index in the .env file.")
+    st.error("❌ Please set all API keys and the Pinecone index in the .env file.")
     st.stop()
 
-st.title("📘 Chat with Multiple PDFs")
+st.title("📚 Chat with Multiple PDFs")
 
 # Upload multiple PDFs
-files = st.file_uploader("Upload PDF files", type="pdf", accept_multiple_files=True)
+files = st.file_uploader("📂 Upload PDF files", type="pdf", accept_multiple_files=True)
 
 if files:
     all_docs = []
     splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 
     for uploaded_file in files:
-        progress_placeholder = st.empty()
-        progress_bar = st.progress(0)
-
-        steps = [
-            ("📂 PDF uploaded", 20),
-            ("⏳ Chunking into ~1000 tokens with 200 overlap...", 40),
-            ("✅ Chunking completed", 50),
-            ("⏳ Creating embeddings with Cohere...", 70),
-            ("⏳ Storing vectors in Pinecone...", 90),
-            ("✅ Processing completed", 100)
-        ]
-
-        for step, pct in steps:
-            progress_placeholder.write(step)
-            progress_bar.progress(pct)
-            time.sleep(0.5)  # simulate step timing
-
-        # Save uploaded file temporarily
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
             tmp_file.write(uploaded_file.read())
             tmp_path = tmp_file.name
 
-        # Load and preprocess
         loader = PyPDFLoader(tmp_path)
         docs = loader.load()
 
@@ -71,41 +51,38 @@ if files:
         split_docs = splitter.split_documents(docs)
         all_docs.extend(split_docs)
 
-    # Embeddings
     embeddings = CohereEmbeddings(model="embed-english-v3.0", cohere_api_key=cohere_api_key)
 
-    # Pinecone setup
     pc = Pinecone(api_key=pinecone_api_key)
+
     vectorstore = PineconeVectorStore.from_documents(all_docs, embeddings, index_name=pinecone_index)
     st.session_state.vectors = vectorstore
 
-    # LLM
     llm = ChatGroq(
         groq_api_key=groq_api_key,
         model_name="llama-3.1-8b-instant"
     )
 
-    # Prompt template
     prompt = ChatPromptTemplate.from_template("""
     You are a helpful assistant. Use the context below to answer.
     If the answer is not in the context, reply: "Sorry, I could not find an answer in the provided documents."
-    
+
     Cite sources inline using [1], [2], etc., based on the context chunk metadata.
-    
+
     <context>
     {context}
     </context>
-    
+
     Question: {input}
     """)
 
     document_chain = create_stuff_documents_chain(llm, prompt)
 
-    # Retriever & Reranker
     retriever = st.session_state.vectors.as_retriever(
         search_type="mmr",
         search_kwargs={"k": 10, "fetch_k": 20}
     )
+
     reranker = CohereRerank(cohere_api_key=cohere_api_key, model="rerank-english-v3.0", top_n=5)
 
     def retrieve_and_rerank(query: str):
@@ -113,9 +90,9 @@ if files:
         reranked_docs = reranker.compress_documents(docs, query)
         return reranked_docs
 
-    # --- User Input ---
-    st.markdown("### 🔍 **Ask a question across all uploaded PDFs:**")
-    user_input = st.text_input("", placeholder="Type your question here...")
+    # ---- Styled Search Box ----
+    st.markdown("### 🔎 **Ask a question across all uploaded PDFs:**")
+    user_input = st.text_input("", placeholder="Type your question here...", label_visibility="collapsed")
 
     if user_input:
         start_time = time.time()
@@ -128,15 +105,15 @@ if files:
         end_time = time.time()
         response_time_ms = (end_time - start_time) * 100
 
-        # ---- Token & Cost Estimation ----
+        # ---- Token & Cost Estimation (rough) ----
         tokens_used = len(user_input.split()) + sum(len(d.page_content.split()) for d in reranked_docs)
-        cost_per_token = 0.000002  # $0.002 / 1K tokens → $0.000002 per token
+        cost_per_token = 0.000002  # Example cost assumption
         estimated_cost = tokens_used * cost_per_token
 
         # Answer
         answer = response
         if "Sorry" in str(answer) or str(answer).strip() == "":
-            st.warning("No relevant answer was found in the uploaded PDFs.")
+            st.warning("⚠️ No relevant answer was found in the uploaded PDFs.")
         else:
             st.subheader("💡 Answer:")
             st.write(answer)
@@ -148,11 +125,11 @@ if files:
         st.write(f"💰 Estimated cost: ${estimated_cost:.6f}")
 
         # Sources
-        st.subheader("📚 Sources used:")
+        st.subheader("📖 Sources used:")
         for i, doc in enumerate(reranked_docs, start=1):
             st.markdown(f"[{i}] **Source**: {doc.metadata.get('source', 'N/A')}  "
                         f"(Page {doc.metadata.get('page', 'N/A')})  "
                         f"— Section: {doc.metadata.get('section', 'N/A')}, Position: {doc.metadata.get('position', 'N/A')}")
 
 else:
-    st.info("Please upload one or more PDF files to start.")
+    st.info("ℹ️ Please upload one or more PDF files to start.")
