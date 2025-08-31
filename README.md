@@ -51,7 +51,7 @@ Live App: [https://groqragapp.onrender.com/](https://groqragapp.onrender.com/)
 
 1. **Clone repo**
 ```bash
-git clone https://github.com/yourusername/rag-pdf-chatbot.git
+git clone https://github.com/Nitinpratap22061/groqragapp.git
 cd rag-pdf-chatbot
 ```
 
