@@ -90,7 +90,7 @@ if files:
         reranked_docs = reranker.compress_documents(docs, query)
         return reranked_docs
 
-    # ---- Styled Search Box ----
+    # -
     st.markdown("### 🔎 **Ask a question across all uploaded PDFs:**")
     user_input = st.text_input("", placeholder="Type your question here...", label_visibility="collapsed")
 
@@ -119,10 +119,10 @@ if files:
             st.write(answer)
 
         # Metrics
-        st.subheader("⚡ Performance & Cost")
-        st.write(f"⏱️ Response time: {response_time_ms:.2f} ms")
-        st.write(f"🔤 Tokens used (approx): {tokens_used}")
-        st.write(f"💰 Estimated cost: ${estimated_cost:.6f}")
+        st.subheader(" Performance & Cost")
+        st.write(f"Response time: {response_time_ms:.2f} ms")
+        st.write(f" Tokens used (approx): {tokens_used}")
+        st.write(f"Estimated cost: ${estimated_cost:.6f}")
 
         # Sources
         st.subheader("📖 Sources used:")
