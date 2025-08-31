@@ -26,7 +26,7 @@ if not all([groq_api_key, cohere_api_key, pinecone_api_key, pinecone_index]):
 st.title("📚 Chat with Multiple PDFs")
 
 # Upload multiple PDFs
-files = st.file_uploader("📂 Upload PDF files", type="pdf", accept_multiple_files=True)
+files = st.file_uploader("📂 Upload PDF files And Ask Or Search Anything about it...", type="pdf", accept_multiple_files=True)
 
 if files:
     all_docs = []
