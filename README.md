@@ -29,8 +29,8 @@ Live App: [https://groqragapp.onrender.com/](https://groqragapp.onrender.com/)
 - [Streamlit](https://streamlit.io/) – UI framework
 - [LangChain](https://www.langchain.com/) – RAG pipeline
 - [FAISS](https://github.com/facebookresearch/faiss) / [Pinecone](https://www.pinecone.io/) – Vector DB
-- [Sentence-Transformers](https://www.sbert.net/) – Embedding models
-- [Cohere](https://cohere.com/), [Groq](https://groq.com/), [OpenAI](https://openai.com/) – LLM providers
+- [Cohere](https://cohere.com/),[Sentence-Transformers](https://www.sbert.net/) – Embedding models
+-  [Groq](https://groq.com/), [OpenAI](https://openai.com/) – LLM providers
 - [PyPDF](https://pypi.org/project/pypdf/) / [Unstructured](https://unstructured-io.github.io/) – PDF parsing
 
 ---
