@@ -38,17 +38,11 @@ Live App: [https://groqragapp.onrender.com/](https://groqragapp.onrender.com/)
 ## 📂 Project Structure
 ```
 .
-├── backend/
-│   ├── model/               # LangChain + VectorDB logic
-│   ├── routes/              # API endpoints (if needed)
-│
-├── frontend/
-│   ├── app.py               # Streamlit UI
-│   ├── components/          # UI Components
-│
-├── .env                     # API keys + environment variables
-├── requirements.txt         # Python dependencies
-└── README.md                # Documentation
+├
+│-- multidoc.py (Main Python file)
+|--requirements.txt
+|--.env.examples
+|--Readme.md
 ```
 
 ---
