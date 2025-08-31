@@ -32,7 +32,6 @@ Live App: [https://groqragapp.onrender.com/](https://groqragapp.onrender.com/)
 - [Sentence-Transformers](https://www.sbert.net/) – Embedding models
 - [Cohere](https://cohere.com/), [Groq](https://groq.com/), [OpenAI](https://openai.com/) – LLM providers
 - [PyPDF](https://pypi.org/project/pypdf/) / [Unstructured](https://unstructured-io.github.io/) – PDF parsing
-- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) – OCR for scanned PDFs
 
 ---
 
