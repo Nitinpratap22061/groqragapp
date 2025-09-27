@@ -1,7 +1,12 @@
 streamlit==1.32.0
-langchain==0.2.12
-langchain-groq==0.1.5
-langchain-community==0.2.10
+
+# Langchain packages updated to compatible versions
+langchain>=0.3.0,<0.4
+langchain-groq>=0.2.0,<0.3
+langchain-community>=0.3.0,<0.4
+langchain-pinecone>=0.2.5,<0.3
+langchain-cohere>=0.2.0,<0.3
+
 openai==1.35.14
 python-dotenv==1.0.1
 pypdf==4.2.0
@@ -13,6 +18,4 @@ tqdm==4.66.5
 huggingface-hub==0.24.5
 sentence-transformers==2.7.0
 pinecone-client==3.2.2
-langchain-pinecone>=0.2.3,<0.3
 cohere==5.5.8
-langchain-cohere==0.1.9
