@@ -6,7 +6,7 @@ It allows users to upload PDFs, process them into **chunks**, create **embedding
 
 ---
 
-Live App: [https://groqragapp.onrender.com/](https://groqragapp.onrender.com/)
+Live App: [https://groqragapp-cpep2ffsqzojavjlvicy5d.streamlit.app/](https://groqragapp-cpep2ffsqzojavjlvicy5d.streamlit.app/)
 
 ## 🚀 Features
 - 📤 Upload PDFs directly in the web app
