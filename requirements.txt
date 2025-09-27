@@ -13,6 +13,6 @@ tqdm==4.66.5
 huggingface-hub==0.24.5
 sentence-transformers==2.7.0
 pinecone-client==3.2.2
-langchain-pinecone==0.0.3
+langchain-pinecone>=0.2.3,<0.3
 cohere==5.5.8
 langchain-cohere==0.1.9
