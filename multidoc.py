@@ -12,7 +12,6 @@ from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone
 from dotenv import load_dotenv
 
-# Load environment variables
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
 cohere_api_key = os.getenv("COHERE_API_KEY")
@@ -25,7 +24,6 @@ if not all([groq_api_key, cohere_api_key, pinecone_api_key, pinecone_index]):
 
 st.title("📚 Chat with Multiple PDFs")
 
-# Upload multiple PDFs
 files = st.file_uploader("📂 Upload PDF files And Ask Or Search Anything about it...", type="pdf", accept_multiple_files=True)
 
 if files:
@@ -118,13 +116,12 @@ if files:
             st.subheader("💡 Answer:")
             st.write(answer)
 
-        # Metrics
+        
         st.subheader(" Performance & Cost")
         st.write(f"Response time: {response_time_ms:.2f} ms")
         st.write(f" Tokens used (approx): {tokens_used}")
         st.write(f"Estimated cost: ${estimated_cost:.6f}")
 
-        # Sources
         st.subheader("📖 Sources used:")
         for i, doc in enumerate(reranked_docs, start=1):
             st.markdown(f"[{i}] **Source**: {doc.metadata.get('source', 'N/A')}  "
